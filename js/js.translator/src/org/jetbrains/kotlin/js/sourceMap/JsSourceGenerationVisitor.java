@@ -57,9 +57,7 @@ public class JsSourceGenerationVisitor extends JsToStringGenerationVisitor imple
 
     @Override
     public void accept(JsNode node) {
-        if (!(node instanceof JsNameRef) && !(node instanceof JsThisRef)) {
-            mapSource(node);
-        }
+        mapSource(node);
         super.accept(node);
     }
 

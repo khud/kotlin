@@ -575,6 +575,8 @@ fun generators(): List<GenericFunction> {
             Both [size] and [step] must be positive and can be greater than the number of elements in this ${f.collection}.
             @param size the number of elements to take in each window
             @param step the number of elements to move window forward on an each step
+
+            @sample samples.collections.Sequences.Transformations.averageWindows
             """
         }
 
@@ -645,6 +647,8 @@ fun generators(): List<GenericFunction> {
             Both [size] and [step] must be positive and can be greater than the number of elements in this ${f.collection}.
             @param size the number of elements to take in each window
             @param step the number of elements to move window forward on an each step
+
+            @sample samples.collections.Sequences.Transformations.takeWindows
             """
         }
 
@@ -692,6 +696,8 @@ fun generators(): List<GenericFunction> {
             Both [size] and [step] must be positive and can be greater than the number of elements in this ${f.collection}.
             @param size the number of elements to take in each window
             @param step the number of elements to move window forward on an each step
+
+            @sample samples.collections.Sequences.Transformations.averageWindows
             """
         }
         typeParam("R")
@@ -719,6 +725,8 @@ fun generators(): List<GenericFunction> {
             Both [size] and [step] must be positive and can be greater than the number of elements in this ${f.collection}.
             @param size the number of elements to take in each window
             @param step the number of elements to move window forward on an each step
+
+            @sample samples.collections.Sequences.Transformations.takeWindows
             """
         }
         returns { "Sequence<String> "}

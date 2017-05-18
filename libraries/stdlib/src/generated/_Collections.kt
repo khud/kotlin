@@ -2035,6 +2035,8 @@ public inline fun <T> Collection<T>.plusElement(element: T): List<T> {
  * Both [size] and [step] must be positive and can be greater than the number of elements in this collection.
  * @param size the number of elements to take in each window
  * @param step the number of elements to move window forward on an each step
+ * 
+ * @sample samples.collections.Sequences.Transformations.takeWindows
  */
 @SinceKotlin("1.2")
 public fun <T> Iterable<T>.windowed(size: Int, step: Int): List<List<T>> {
@@ -2068,6 +2070,8 @@ public fun <T> Iterable<T>.windowed(size: Int, step: Int): List<List<T>> {
  * Both [size] and [step] must be positive and can be greater than the number of elements in this collection.
  * @param size the number of elements to take in each window
  * @param step the number of elements to move window forward on an each step
+ * 
+ * @sample samples.collections.Sequences.Transformations.averageWindows
  */
 @SinceKotlin("1.2")
 public fun <T, R> Iterable<T>.windowed(size: Int, step: Int, transform: (List<T>) -> R): List<R> {

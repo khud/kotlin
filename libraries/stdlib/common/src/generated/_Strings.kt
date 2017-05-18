@@ -737,6 +737,8 @@ public header inline fun String.partition(predicate: (Char) -> Boolean): Pair<St
  * Both [size] and [step] must be positive and can be greater than the number of elements in this char sequence.
  * @param size the number of elements to take in each window
  * @param step the number of elements to move window forward on an each step
+ * 
+ * @sample samples.collections.Sequences.Transformations.takeWindows
  */
 @SinceKotlin("1.2")
 public header fun CharSequence.windowed(size: Int, step: Int): List<String>
@@ -753,6 +755,8 @@ public header fun CharSequence.windowed(size: Int, step: Int): List<String>
  * Both [size] and [step] must be positive and can be greater than the number of elements in this char sequence.
  * @param size the number of elements to take in each window
  * @param step the number of elements to move window forward on an each step
+ * 
+ * @sample samples.collections.Sequences.Transformations.averageWindows
  */
 @SinceKotlin("1.2")
 public header fun <R> CharSequence.windowed(size: Int, step: Int, transform: (CharSequence) -> R): List<R>
@@ -767,6 +771,8 @@ public header fun <R> CharSequence.windowed(size: Int, step: Int, transform: (Ch
  * Both [size] and [step] must be positive and can be greater than the number of elements in this char sequence.
  * @param size the number of elements to take in each window
  * @param step the number of elements to move window forward on an each step
+ * 
+ * @sample samples.collections.Sequences.Transformations.takeWindows
  */
 @SinceKotlin("1.2")
 public header fun CharSequence.windowedSequence(size: Int, step: Int): Sequence<String> 
@@ -783,6 +789,8 @@ public header fun CharSequence.windowedSequence(size: Int, step: Int): Sequence<
  * Both [size] and [step] must be positive and can be greater than the number of elements in this char sequence.
  * @param size the number of elements to take in each window
  * @param step the number of elements to move window forward on an each step
+ * 
+ * @sample samples.collections.Sequences.Transformations.averageWindows
  */
 @SinceKotlin("1.2")
 public header fun <R> CharSequence.windowedSequence(size: Int, step: Int, transform: (CharSequence) -> R): Sequence<R> 

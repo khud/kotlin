@@ -21,6 +21,7 @@ import java.io.File
 import java.lang.reflect.InvocationTargetException
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.concurrent.write
+import kotlin.jvm.internal.FunctionBase
 
 open class GenericReplEvaluator(
         val baseClasspath: Iterable<File>,
@@ -112,8 +113,23 @@ open class GenericReplEvaluator(
             val resultField = scriptClass.getDeclaredField(resultFieldName).apply { isAccessible = true }
             val resultValue: Any? = resultField.get(scriptInstance)
 
-            return if (compileResult.hasResult) ReplEvalResult.ValueResult(resultFieldName, resultValue, compileResult.type)
-            else ReplEvalResult.UnitResult()
+            return if (compileResult.hasResult) {
+                val value = when (resultValue) {
+                    null -> null
+                    is Function<*> -> resultValue
+                    else -> {
+                        if (compileResult.isFunctionType) {
+                            val arityMethod = resultValue::class.java.getMethod("getArity")
+                            val arity = arityMethod.invoke(resultValue) as Int
+                            object : FunctionBase<Any> {
+                                override val arity: Int
+                                    get() = arity
+                            }
+                        } else resultValue
+                    }
+                }
+                ReplEvalResult.ValueResult(resultFieldName, value, compileResult.type)
+            } else ReplEvalResult.UnitResult()
         }
     }
 }

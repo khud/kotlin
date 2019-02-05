@@ -157,6 +157,17 @@ obj
         Assert.assertTrue("eval in eval is too long: ${times.joinToString { "(${it.first.ms()}, ${it.second.ms()})" }} (expecting no more than 5x difference)",
                 adjustedMaxDiff.third < 10 || adjustedMaxDiff.first * 5 > adjustedMaxDiff.second )
     }
+
+    @Test
+    fun `kotlin script evaluation should support functional return types`() {
+        val scriptEngine = KotlinJsr223JvmLocalScriptEngineFactory().scriptEngine
+
+        val script = "{1 + 2}"
+        val result = scriptEngine.eval(script)
+
+        Assert.assertTrue(result is Function0<*>)
+        Assert.assertEquals(3, (result as Function0<*>).invoke())
+    }
 }
 
 fun assertThrows(exceptionClass: Class<*>, body: () -> Unit) {

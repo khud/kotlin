@@ -38,6 +38,7 @@ import java.io.File
 import java.net.URLClassLoader
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.locks.ReentrantReadWriteLock
+import kotlin.jvm.internal.FunctionBase
 
 class GenericReplTest : KtUsefulTestCase() {
     fun testReplBasics() {
@@ -138,6 +139,18 @@ class GenericReplTest : KtUsefulTestCase() {
 
             assertEvalResult(repl, state, "5 * 4", 20)
             assertEvalResult(repl, state, "res0 + 3", 23)
+        }
+    }
+
+    fun testReplResultValue() {
+        TestRepl().use { repl ->
+            val state = repl.createState()
+            val result = repl.compileAndEval(state, ReplCodeLine(1, 0, "{ 1 + 1 }"))
+            val evalResult = result.second
+            if (evalResult is ReplEvalResult.ValueResult) {
+                assertTrue(evalResult.value is FunctionBase<*>)
+                assertEquals(0, (evalResult.value as FunctionBase<*>).arity)
+            }
         }
     }
 

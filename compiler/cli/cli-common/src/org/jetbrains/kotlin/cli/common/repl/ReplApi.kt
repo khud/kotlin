@@ -22,6 +22,7 @@ import java.io.Serializable
 import java.util.*
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.reflect.KClass
+import kotlin.jvm.internal.FunctionBase
 
 const val REPL_CODE_LINE_FIRST_NO = 1
 const val REPL_CODE_LINE_FIRST_GEN = 1
@@ -124,7 +125,8 @@ interface ReplEvalAction {
 sealed class ReplEvalResult : Serializable {
     class ValueResult(val name: String, val value: Any?, val type: String?) : ReplEvalResult() {
         override fun toString(): String {
-           return "$name: $type = $value"
+            val v = if (value is FunctionBase<*>) "<function${value.arity}>" else value
+            return "$name: $type = $v"
         }
 
         companion object { private val serialVersionUID: Long = 1L }
